@@ -1,4 +1,4 @@
-# Selenide + TestContainers (Docker) Habeko portal test framweork
+# Selenide + TestContainers (Docker) Habeko portal test framework
 
 This is an automated test project for Habeko portal
 
