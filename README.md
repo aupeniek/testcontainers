@@ -1,9 +1,10 @@
-# Selenide + TestContainers (Docker)
+# Selenide + TestContainers (Docker) Habeko portal test framweork
 
-This is a sample project showing how to run tests in Docker with help of TestContainer library.
+This is an automated test project for Habeko portal
 
-Look for `GoogleTestWithDocker` to see how to run Docker with just a single annotation!
+Requires:
+-Docker
+-Gradle
 
-For reference, look for `GoogleTest` to see how the same test runs without Docker.
 
-[![Build Status](https://travis-ci.org/selenide-examples/testcontainers.png)](https://travis-ci.org/selenide-examples/testcontainers)
+Look for examples directory for execution options

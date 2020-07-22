@@ -57,7 +57,6 @@ public class DownloadTestWithDockerAndProxy {
         WebDriverRunner.setWebDriver(driver, proxyServer);
     }
 
-    @Test
     public void search() throws FileNotFoundException {
         open("https://mvnrepository.com/artifact/com.codeborne/selenide/5.11.1");
 

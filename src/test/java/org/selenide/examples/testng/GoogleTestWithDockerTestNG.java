@@ -36,7 +36,6 @@ public class GoogleTestWithDockerTestNG {
     chrome.stop();
   }
 
-  @Test
   public void search() {
     open("https://google.com/ncr");
     $(By.name("q")).val("Selenide").pressEnter();

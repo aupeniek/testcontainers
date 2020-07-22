@@ -1,6 +1,5 @@
 package org.selenide.examples;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.After;
@@ -12,13 +11,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
+import java.io.*;
+import java.util.Properties;
+
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Selenide.*;
 
-public class GoogleTestWithDockerNoVideo {
+public class InitTestWithDocker {
+
   @Rule
   public BrowserWebDriverContainer chrome =
       new BrowserWebDriverContainer()
+          .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL, new File("build"))
           .withCapabilities(DesiredCapabilities.chrome());
 
   @Before
@@ -32,17 +36,23 @@ public class GoogleTestWithDockerNoVideo {
     WebDriverRunner.closeWebDriver();
   }
 
-  public void search() {
-    open("https://google.com/ncr");
-    $(By.name("q")).val("Selenide").pressEnter();
-    $$("#res .g").shouldHave(sizeGreaterThan(3));
+  public Properties getProperties() {
+    Properties prop = new Properties();
+    String fileName = "config.properties";
+    InputStream is = null;
+    try {
+      is = new FileInputStream(fileName);
+    } catch (FileNotFoundException ex) {
 
-    for (int i = 0; i < 3; i++) {
-      SelenideElement link = $("#res .g", i).find("a");
-      System.out.println(link.attr("href"));
-      link.click();
-      back();
     }
-    sleep(1000);
+    try {
+      prop.load(is);
+    } catch (IOException ex) {
+
+    }
+    return prop;
+    //System.out.println("Config entry: " + prop.getProperty("portal.URL"));
+    //System.out.println("Config entry: " + prop.getProperty("portal.email"));
+    //System.out.println("Config entry: " + prop.getProperty("portal.password"));
   }
 }
